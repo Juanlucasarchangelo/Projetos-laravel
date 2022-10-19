@@ -34,3 +34,5 @@ Route::prefix('/app')->group( function(){
     Route::get('/produtos', function(){ return "Produtos"; })->name('site.produtos');
 
 });
+
+Route::get('/teste/{p1}/{p2}', 'TesteController@teste')->name('teste');
