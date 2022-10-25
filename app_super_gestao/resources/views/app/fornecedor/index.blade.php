@@ -6,7 +6,19 @@
 
 @php
     
-//Para comentários de uma linha
-//*Para comentários de multiplas linhas*/
+
 
 @endphp
+@isset($fornecedores)
+    <h3>Fornecedo: {{ $fornecedores[0]['nome'] }}</h3>
+    <h3>Status: {{ $fornecedores[0]['status'] }}</h3>
+    @isset($fornecedores[0]['cnpj'])
+    <h3>CNPJ: {{ $fornecedores[0]['cnpj'] }}</h3>
+    @endisset
+    <br>
+    <h3>Fornecedo: {{ $fornecedores[1]['nome'] }}</h3>
+    <h3>Status: {{ $fornecedores[1]['status'] }}</h3>
+    @isset($fornecedores[1]['cnpj'])
+    <h3>CNPJ: {{ $fornecedores[1]['cnpj'] }}</h3>
+    @endisset
+@endisset
