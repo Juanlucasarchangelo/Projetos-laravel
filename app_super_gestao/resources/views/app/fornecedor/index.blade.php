@@ -11,21 +11,10 @@
 @endphp
 
 @isset($fornecedores)
-    <h3>Fornecedo: {{ $fornecedores[0]['nome'] }}</h3>
-    <h3>Status: {{ $fornecedores[0]['status'] }}</h3>
-    @isset($fornecedores[0]['cnpj'])
-        <h3>CNPJ: {{ $fornecedores[0]['cnpj'] }}</h3>
-        @empty($fornecedores[0]['cnpj'])
-            <p>vazio</p>
-        @endempty
-    @endisset
-    <br>
-    <h3>Fornecedo: {{ $fornecedores[1]['nome'] }}</h3>
-    <h3>Status: {{ $fornecedores[1]['status'] }}</h3>
-    @isset($fornecedores[1]['cnpj'])
-        <h3>CNPJ: {{ $fornecedores[1]['cnpj'] }}</h3>
-        @empty($fornecedores[1]['cnpj'])
-            <p>vazio</p>
-        @endempty
-    @endisset
+    @foreach ( $fornecedores as $fornec => $fornecedor)
+        {{-- @dd($fornec); --}}
+        <h3>Fornecedo: {{ $fornecedor['nome'] }}</h3>
+        <h3>Status: {{ $fornecedor['status'] }}</h3>
+        <h3>CNPJ: {{ $fornecedor['cnpj'] ?? '000.000.000-00'}}</h3>        
+    @endforeach
 @endisset
