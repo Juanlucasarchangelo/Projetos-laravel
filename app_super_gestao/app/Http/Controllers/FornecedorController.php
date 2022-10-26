@@ -29,6 +29,6 @@ class FornecedorController extends Controller
             ]
         ];
         
-        return view('app.fornecedor.index', compact('fornecedores', 'clientes'));
+        return view('app.fornecedor.index', compact('fornecedores'));
     }
 }
