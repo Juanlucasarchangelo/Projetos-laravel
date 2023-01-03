@@ -13,12 +13,6 @@ class AjusteProdutosFiliais extends Migration
      */
     public function up()
     {
-        Schema::create('filiais', function (Blueprint $table) {
-            $table->id();
-            $table->string('filial', 30);
-            $table->timestamps();
-        });
-
         Schema::create('produtos_filiais', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('filial_id');
@@ -30,10 +24,6 @@ class AjusteProdutosFiliais extends Migration
 
             $table->foreign('filial_id')->references('id')->on('filiais');
             $table->foreign('produto_id')->references('id')->on('produtos');
-
-            Schema::create('produtos', function (Blueprint $table) {
-                $table->dropColumn('preco_venda', 'estoque_minimo', 'estoque_maximo');
-            });
         });
     }
 
@@ -44,6 +34,6 @@ class AjusteProdutosFiliais extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('produtos_filiais');
     }
 }
