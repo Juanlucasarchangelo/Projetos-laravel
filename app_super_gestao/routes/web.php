@@ -14,5 +14,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return "Olá, seja bem vindo!!";
+});
+
+Route::get('/sobre-nos', function () {
+    return "Olá, voCê chegou em Sobre Nós";
+});
+
+Route::get('/contato', function () {
+    return "Olá, você chegou em Contato";
 });
