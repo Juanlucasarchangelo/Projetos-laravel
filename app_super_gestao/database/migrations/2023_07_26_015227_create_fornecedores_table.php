@@ -27,6 +27,10 @@ class CreateFornecedoresTable extends Migration
      */
     public function down()
     {
+        //Verifica se existe antes de criar
         Schema::dropIfExists('fornecedores');
+
+        // Não faz a validação se existe
+        // Schema::drop('fornecedores');
     }
 }

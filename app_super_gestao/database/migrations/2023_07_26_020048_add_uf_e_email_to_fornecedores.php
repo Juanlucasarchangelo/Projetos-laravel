@@ -14,7 +14,7 @@ class AddUfEEmailToFornecedores extends Migration
     public function up()
     {
         Schema::table('fornecedores', function (Blueprint $table) {
-            $table->string('us', 2)->after('nome');
+            $table->string('uf', 2)->after('nome');
             $table->string('email', 150)->after('nome');
         });
     }
@@ -27,7 +27,12 @@ class AddUfEEmailToFornecedores extends Migration
     public function down()
     {
         Schema::table('fornecedores', function (Blueprint $table) {
-            //
+            //Forma individual
+            $table->dropColumn('uf', 'email'); 
+
+            //Forma unitária
+            // $table->dropColumn('uf');
+            // $table->dropColumn('email');
         });
     }
 }
