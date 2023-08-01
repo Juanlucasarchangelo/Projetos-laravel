@@ -23,7 +23,7 @@ class AjusteProdutosFiliais extends Migration
             $table->id();
             $table->unsignedBigInteger('filial_id');
             $table->unsignedBigInteger('produto_id');
-            $table->decimal('prevo_venda', 8, 2);
+            $table->decimal('preco_venda', 8, 2);
             $table->integer('estoque_minimo');
             $table->integer('estoque_maximo');
             $table->timestamps();
