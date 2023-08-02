@@ -3,9 +3,13 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Fornecedor extends Model
 {
+    // Incorporando a traits soft delete (Metodo de remoção suave)
+    use SoftDeletes;
+
     // Quando o laravel não encontra a tablea, tem que definir ela assim
     protected $table = 'fornecedores';
 
