@@ -18,7 +18,7 @@ use PhpParser\Node\Stmt\Return_;
 Route::get('/', 'PrincipalController@index')->name('site.index');
 Route::get('/sobre-nos', 'SobreNosController@index')->name('site.sobre');
 Route::get('/contato', 'ContatoController@index')->name('site.contato');
-Route::post('/contato', 'ContatoController@index')->name('site.contato');
+Route::post('/contato', 'ContatoController@salvar')->name('site.contato');
 
 /** Login */
 Route::get('/login', function(){ return 'Login';})->name('site.login');
