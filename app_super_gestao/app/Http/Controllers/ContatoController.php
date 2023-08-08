@@ -9,6 +9,12 @@ class ContatoController extends Controller
 {
     public function index(Request $request)
     {
+        $motivo_contatos = [
+            '1' => 'Duvida',
+            '2' => 'Elogio',
+            '3' => 'Reclamação'
+        ];
+
         /** Usando o metodo SAVE
         $contato = new SiteContato();
         $contato->nome = $request->input('nome');
@@ -24,7 +30,7 @@ class ContatoController extends Controller
         $contato->create($request->all());
         */
 
-        return view('site.contato', ['titulo' => 'Contato (Teste)']);
+        return view('site.contato', ['titulo' => 'Contato (Teste)', 'motivo_contatos' => $motivo_contatos]);
     }
 
     public function salvar(Request $request)

@@ -12,7 +12,7 @@
         </div>
         <div class="informacao-pagina">
             <div class="contato-principal">
-                @component('site.layouts._componentes.form_contato', ['classe' => 'borda-preta'])
+                @component('site.layouts._componentes.form_contato', ['classe' => 'borda-preta', 'motivo_contatos' => $motivo_contatos])
                 <h3>Contato</h3>
                 <p>Nossa equipe entrará em contato assim que possível</p>
                 @endcomponent
