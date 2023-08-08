@@ -7,27 +7,36 @@ use App\SiteContato;
 
 class ContatoController extends Controller
 {
-    public function contato(Request $request) {
+    public function index(Request $request)
+    {
+        /** Usando o metodo SAVE
+        $contato = new SiteContato();
+        $contato->nome = $request->input('nome');
+        $contato->email = $request->input('email');
+        $contato->telefone = $request->input('telefone');
+        $contato->motivo_contato = $request->input('motivo_contato');
+        $contato->mensagem = $request->input('mensagem');
+        $contato->save();
+         */
 
-        $motivo_contatos = [
-            '1' => 'Dúvida',
-            '2' => 'Elogio',
-            '3' => 'Reclamação'
-        ];
+        /* Usando o metodo create 
+        $contato = new SiteContato();
+        $contato->create($request->all());
+        */
 
-        return view('site.contato', ['titulo' => 'Contato (teste)', 'motivo_contatos' => $motivo_contatos]);
+        return view('site.contato', ['titulo' => 'Contato (Teste)']);
     }
 
-    public function salvar(Request $request) {
-
-        //realizar a validação dos dados do formulário recebidos no request
+    public function salvar(Request $request)
+    {
         $request->validate([
-            'nome' => 'required|min:3|max:40',
+            'nome' => 'required|min:5|max:50',
+            'email' => 'required|email',
             'telefone' => 'required',
-            'email' => 'required',
             'motivo_contato' => 'required',
-            'mensagem' => 'required|max:2000'
+            'mensagem' => 'required|max:2000',
         ]);
-        // SiteContato::create($request->all());
+
+        SiteContato::create($request->all());
     }
 }
