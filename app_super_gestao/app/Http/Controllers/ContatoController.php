@@ -4,16 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\SiteContato;
+use App\MotivoContato;
 
 class ContatoController extends Controller
 {
     public function index(Request $request)
     {
-        $motivo_contatos = [
-            '1' => 'Duvida',
-            '2' => 'Elogio',
-            '3' => 'Reclamação'
-        ];
+        $motivo_contatos = MotivoContato::all();
 
         /** Usando o metodo SAVE
         $contato = new SiteContato();
@@ -35,14 +32,24 @@ class ContatoController extends Controller
 
     public function salvar(Request $request)
     {
-        $request->validate([
-            'nome' => 'required|min:5|max:50',
-            'email' => 'required|email',
-            'telefone' => 'required',
-            'motivo_contato' => 'required',
-            'mensagem' => 'required|max:2000',
-        ]);
+        $request->validate(
+            [
+                'nome' => 'required|min:5|max:50|unique:site_contatos',
+                'email' => 'required|email',
+                'telefone' => 'required',
+                'motivo_contatos_id' => 'required',
+                'mensagem' => 'required|max:2000',
+            ],
+            [
+                'required' => 'O campo :attribute é obrigatorio.',
+                'email' => 'O email informado não é valido.',
+                'max' => 'O conteudo ultrapassa o limite proposto.',
+                'min' => 'O conteudo não atinge o limite minimo.'
+            ]
+        );
 
         SiteContato::create($request->all());
+
+        return redirect()->route('site.index');
     }
 }
