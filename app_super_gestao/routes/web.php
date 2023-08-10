@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\LogAcessoMiddleware;
 use Illuminate\Support\Facades\Route;
 use PhpParser\Node\Stmt\Return_;
 
@@ -15,19 +16,31 @@ use PhpParser\Node\Stmt\Return_;
 */
 
 /** Telas */
-Route::get('/', 'PrincipalController@index')->name('site.index');
+Route::middleware(LogAcessoMiddleware::class)
+    ->get('/', 'PrincipalController@index')
+    ->name('site.index');
 Route::get('/sobre-nos', 'SobreNosController@index')->name('site.sobre');
-Route::get('/contato', 'ContatoController@index')->name('site.contato');
-Route::post('/contato', 'ContatoController@salvar')->name('site.contato');
+Route::middleware(LogAcessoMiddleware::class)
+    ->get('/contato', 'ContatoController@index')
+    ->name('site.contato');
+Route::middleware(LogAcessoMiddleware::class)
+    ->post('/contato', 'ContatoController@salvar')
+    ->name('site.contato');
 
 /** Login */
-Route::get('/login', function(){ return 'Login';})->name('site.login');
+Route::get('/login', function () {
+    return 'Login';
+})->name('site.login');
 
 /**Agrupamento App */
-Route::prefix('/app')->group(function(){
-    Route::get('/clientes', function(){ return 'Clientes';})->name('app.clientes');
+Route::prefix('/app')->group(function () {
+    Route::get('/clientes', function () {
+        return 'Clientes';
+    })->name('app.clientes');
     Route::get('/fornecedores', 'app\FornecedorController@index')->name('app.fornecedores');
-    Route::get('/produtos', function(){ return 'Produtos';})->name('app.produtos');
+    Route::get('/produtos', function () {
+        return 'Produtos';
+    })->name('app.produtos');
 });
 
 // Route::get('/rota1', function(){
@@ -43,7 +56,7 @@ Route::prefix('/app')->group(function(){
 // })->name('site.rota2');
 
 /** Rota para erro 404 */
-Route::fallback(function(){
+Route::fallback(function () {
     echo 'A rota acessada não existe <a href="' . route('site.index') . '">Clique aqui para voltar</a>';
 });
 
