@@ -15,27 +15,11 @@ class AutenticacaoMiddleware
      */
     public function handle($request, Closure $next, $metodo_autenticacao, $perfil)
     {
-        echo $metodo_autenticacao . ' - ' . $perfil . '<br>' ;
-
-        if($metodo_autenticacao == 'padrao'){
-            echo 'Verifica o usuário e senha no banco de dados.' . $perfil .  '<br>';
-        }
-
-        if($metodo_autenticacao == 'ldap'){
-            echo 'Verifica o usuário e senha no AD. ' . $perfil . '<br>';
-        }
-
-        if($perfil == 'visitante'){
-            echo 'Exibe apenas alguns recursos. <br>';
-        } else {
-            echo 'Carrega o perfil do banco. <br>';
-        }
-
-        // Veriica se o user tem acesso
-        if (false) {
+        session_start();
+        if (isset($_SESSION['email']) && $_SESSION['email'] != '') {
             return $next($request);
         } else {
-            return response('Acesso negado, este caminho requer autenticação.');
+            return redirect()->route('site.login', ['erro' => 2]);
         }
     }
 }
