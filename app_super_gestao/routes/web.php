@@ -27,11 +27,11 @@ Route::post('/login', 'LoginController@autenticar')->name('site.login');
 
 /**Agrupamento App */
 Route::middleware('autenticacao:padrao,visitante,p3,p4')->prefix('/app')->group(function () {
-    Route::get('/cliente', 'HomeController@index')->name('app.cliente');
-    Route::get('/home', function () {return 'Clientes';})->name('app.home');
-    Route::get('/sair', function () {return 'Clientes';})->name('app.sair');
-    Route::get('/fornecedore', 'app\FornecedorController@index')->name('app.fornecedore');
-    Route::get('/produto', function () {return 'Produtos';})->name('app.produto');
+    Route::get('/cliente', 'ClienteController@index')->name('app.cliente');
+    Route::get('/home', 'HomeController@index')->name('app.home');
+    Route::get('/sair', 'LoginController@sair')->name('app.sair');
+    Route::get('/fornecedor', 'app\FornecedorController@index')->name('app.fornecedor');
+    Route::get('/produto', 'ProdutoController@index')->name('app.produto');
 });
 
 // Route::get('/rota1', function(){
