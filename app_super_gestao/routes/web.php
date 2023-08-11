@@ -16,16 +16,10 @@ use PhpParser\Node\Stmt\Return_;
 */
 
 /** Telas */
-Route::middleware(LogAcessoMiddleware::class)
-    ->get('/', 'PrincipalController@index')
-    ->name('site.index');
+Route::get('/', 'PrincipalController@index')->name('site.index')->middleware('log.acesso');
 Route::get('/sobre-nos', 'SobreNosController@index')->name('site.sobre');
-Route::middleware(LogAcessoMiddleware::class)
-    ->get('/contato', 'ContatoController@index')
-    ->name('site.contato');
-Route::middleware(LogAcessoMiddleware::class)
-    ->post('/contato', 'ContatoController@salvar')
-    ->name('site.contato');
+Route::get('/contato', 'ContatoController@index')->name('site.contato');
+Route::post('/contato', 'ContatoController@salvar')->name('site.contato');
 
 /** Login */
 Route::get('/login', function () {
