@@ -4,10 +4,54 @@ namespace App\Http\Controllers\app;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Fornecedor;
 
 class FornecedorController extends Controller
 {
-    public function index(){
-        return view('app.fornecedor');
+    public $mensagem;
+
+    public function index()
+    {
+        return view('app.fornecedor.index');
+    }
+
+    public function listar(Request $request)
+    {   
+        $queryFornecedor = Fornecedor::where('nome', 'like', '%'.$request->input('nome').'%')
+        ->where('site', 'like', '%'.$request->input('site').'%')
+        ->where('uf', 'like', '%'.$request->input('uf').'%')
+        ->where('email', 'like', '%'.$request->input('email ').'%')
+        ->get();
+
+        return view('app.fornecedor.listar', ['queryFornecedor' => $queryFornecedor]);
+    }
+
+
+    public function adicionar(Request $request)
+    {
+        if($request->input('_token')){
+            $regras = [
+                'nome' => 'required|min:3|max:40',
+                'site' => 'required',
+                'uf' => 'required|min:2|max:2',
+                'email' => 'email',
+            ];
+
+            $feedbacks = [
+                'required' => 'O campo :attribute deve ser preenchido.',
+                'nome.min' => 'O campo :attribute deve ter no minimo 3 caracteres.',
+                'nome.max' => 'O campo :attribute deve ter no máximo 40 caracteres.',
+                'uf.min' => 'O campo :attribute deve ter no minimo 2 caracteres.',
+                'uf.max' => 'O campo :attribute deve ter no máximo 2 caracteres.',
+                'email' => 'O campo :attribute não foi preenchido corretamente.',
+            ];
+
+            $request->validate($regras, $feedbacks);
+
+            Fornecedor::create($request->all());
+
+            $this->mensagem = 'Cadastro realizado com sucesso.';
+        }
+        return view('app.fornecedor.adicionar', ['mensagem' => $this->mensagem]);
     }
 }
