@@ -5,6 +5,7 @@ namespace App\Http\Controllers\app;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Fornecedor;
+use PhpParser\Node\Stmt\Return_;
 
 class FornecedorController extends Controller
 {
@@ -16,20 +17,28 @@ class FornecedorController extends Controller
     }
 
     public function listar(Request $request)
-    {   
-        $queryFornecedor = Fornecedor::where('nome', 'like', '%'.$request->input('nome').'%')
-        ->where('site', 'like', '%'.$request->input('site').'%')
-        ->where('uf', 'like', '%'.$request->input('uf').'%')
-        ->where('email', 'like', '%'.$request->input('email ').'%')
-        ->get();
+    {
+        $queryFornecedor = Fornecedor::where('nome', 'like', '%' . $request->input('nome') . '%')
+            ->where('site', 'like', '%' . $request->input('site') . '%')
+            ->where('uf', 'like', '%' . $request->input('uf') . '%')
+            ->where('email', 'like', '%' . $request->input('email ') . '%')
+            ->get();
 
         return view('app.fornecedor.listar', ['queryFornecedor' => $queryFornecedor]);
     }
 
+    public function editar($id, $mensagem = '')
+    {
+        $fornecedor = Fornecedor::find($id);
+
+        // dd($fornecedor);
+
+        return view('app.fornecedor.adicionar', ['fornecedor' => $fornecedor, 'mensagem' => $mensagem]);
+    }
 
     public function adicionar(Request $request)
     {
-        if($request->input('_token')){
+        if ($request->input('_token') != '' && $request->input('id') == '') {
             $regras = [
                 'nome' => 'required|min:3|max:40',
                 'site' => 'required',
@@ -52,6 +61,22 @@ class FornecedorController extends Controller
 
             $this->mensagem = 'Cadastro realizado com sucesso.';
         }
+
+        if ($request->input('_token') != '' && $request->input('id') != '') {
+            $fornecedor = Fornecedor::find($request->input('id'));
+
+            $update = $fornecedor->update($request->all());
+
+            if($update){
+                $this->mensagem = 'Atualização realizado com sucesso.';  
+            } else {
+                $this->mensagem = 'Não foi possivel alterar o registro.';
+            }
+
+            return redirect()->route('app.fornecedor.editar', ['id' => $request->input('id'), 'mensagem' => $this->mensagem]);
+            
+        }
+
         return view('app.fornecedor.adicionar', ['mensagem' => $this->mensagem]);
     }
 }

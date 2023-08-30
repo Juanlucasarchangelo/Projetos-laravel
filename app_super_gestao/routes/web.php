@@ -36,6 +36,7 @@ Route::middleware('autenticacao:padrao,visitante,p3,p4')->prefix('/app')->group(
     Route::get('/fornecedor/adicionar', 'app\FornecedorController@adicionar')->name('app.fornecedor.adicionar');
     Route::post('/fornecedor/adicionar', 'app\FornecedorController@adicionar')->name('app.fornecedor.adicionar');
     Route::post('/fornecedor/listar', 'app\FornecedorController@listar')->name('app.fornecedor.listar');
+    Route::get('/fornecedor/editar/{id}/{mensagem?}', 'app\FornecedorController@editar')->name('app.fornecedor.editar');
 });
 
 // Route::get('/rota1', function(){
