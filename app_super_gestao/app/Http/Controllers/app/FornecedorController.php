@@ -22,18 +22,9 @@ class FornecedorController extends Controller
             ->where('site', 'like', '%' . $request->input('site') . '%')
             ->where('uf', 'like', '%' . $request->input('uf') . '%')
             ->where('email', 'like', '%' . $request->input('email ') . '%')
-            ->get();
+            ->paginate(5);
 
-        return view('app.fornecedor.listar', ['queryFornecedor' => $queryFornecedor]);
-    }
-
-    public function editar($id, $mensagem = '')
-    {
-        $fornecedor = Fornecedor::find($id);
-
-        // dd($fornecedor);
-
-        return view('app.fornecedor.adicionar', ['fornecedor' => $fornecedor, 'mensagem' => $mensagem]);
+        return view('app.fornecedor.listar', ['queryFornecedor' => $queryFornecedor, 'request' => $request->all()]);
     }
 
     public function adicionar(Request $request)
@@ -78,5 +69,21 @@ class FornecedorController extends Controller
         }
 
         return view('app.fornecedor.adicionar', ['mensagem' => $this->mensagem]);
+    }
+
+    public function editar($id, $mensagem = '')
+    {
+        $fornecedor = Fornecedor::find($id);
+
+        // dd($fornecedor);
+
+        return view('app.fornecedor.adicionar', ['fornecedor' => $fornecedor, 'mensagem' => $mensagem]);
+    }
+
+    public function excluir($id){
+        Fornecedor::find($id)->delete(); // Atribui a data de exclusão
+        // Fornecedor::find($id)->forceDelete(); // Delete do banco
+
+        return redirect()->route('app.fornecedor');
     }
 }
