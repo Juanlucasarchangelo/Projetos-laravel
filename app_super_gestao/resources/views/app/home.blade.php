@@ -3,9 +3,6 @@
 @section('titulo', 'Home')
 
 @section('conteudo')
-<br>
-<br>
-<br>
-<br>
-<h5>Home</h5>
+    <br><br><br><br>Home
 @endsection
+

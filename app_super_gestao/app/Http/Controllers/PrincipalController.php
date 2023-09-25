@@ -7,7 +7,7 @@ use App\MotivoContato;
 
 class PrincipalController extends Controller
 {
-    public function index(){
+    public function principal() {
 
         $motivo_contatos = MotivoContato::all();
 
