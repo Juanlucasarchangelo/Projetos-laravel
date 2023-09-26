@@ -15,7 +15,7 @@ class AlterTableSiteContatosAddFkMotivoContatos extends Migration
     {
         //adicionando a coluna motivo_contatos_id
         Schema::table('site_contatos', function (Blueprint $table) {
-            $table->unsignedBigInteger('motivo_contatos_id');
+            $table->unsignedBigInteger('motivo_contatos_id')->after('id');
         });
 
         //atribuindo motivo_contato para a nova coluna motivo_contatos_id
