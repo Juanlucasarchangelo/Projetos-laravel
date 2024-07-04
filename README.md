@@ -1,2 +1,18 @@
-# Projetos-laravel
-Alguns projetos que me auxiliaram no processo de aprendizagem do framework
+<h1>Projeto <strong>laravel_vue</strong></h1>
+
+<p>Para instalar o projeto em sua máquina, rode os seguintes comandos</p>
+<ol>
+    <li>composer install</li>
+    <li>npm install</li>
+    <li>npm run dev</li>
+    <li>php artisan serve</li>
+</ol>
+
+<p>Para a criação deste mesmo projeto, foi usaodo</p>
+<ul>
+    <li>composer create-project --prefer-dist laravel/laravel=8.5.9 laravel_vue</li>
+    <li>composer require laravel/ui:^3.2.1</li>
+    <li>php artisan ui vue --auth</li>
+    <li>npm install</li>
+    <li>npm run dev</li>
+</ul>
