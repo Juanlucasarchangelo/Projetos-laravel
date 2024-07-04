@@ -1,12 +1,12 @@
 <h1>Projeto <strong>laravel_vue</strong></h1>
 
 <p>Para instalar o projeto em sua máquina, rode os seguintes comandos</p>
-<ol>
+<ul>
     <li>composer install</li>
     <li>npm install</li>
     <li>npm run dev</li>
     <li>php artisan serve</li>
-</ol>
+</ul>
 
 <p>Para a criação deste mesmo projeto, foi usaodo</p>
 <ul>
